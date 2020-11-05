@@ -9,13 +9,11 @@
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.13.0 |
+| terraform | ~> 0.13 |
 | aws | >= 2.0, < 4.0 |
 | helm | >= 1.0, < 1.4.0 |
 | kubernetes | >= 1.10.0 |
 | kubernetes-alpha | ~> 0.2.1 |
-| local | ~> 1.2 |
-| null | ~> 2.0 |
 
 ## Providers
 
