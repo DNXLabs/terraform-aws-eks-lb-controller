@@ -1,6 +1,6 @@
 # Policy
 data "aws_iam_policy_document" "alb_ingress" {
-  count      = var.enabled ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   statement {
     actions = [
@@ -146,7 +146,7 @@ resource "aws_iam_policy" "alb_ingress" {
 
 # Role
 data "aws_iam_policy_document" "alb_ingress_assume" {
-  count      = var.enabled ? 1 : 0
+  count = var.enabled ? 1 : 0
 
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]

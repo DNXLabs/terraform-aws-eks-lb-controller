@@ -6,7 +6,7 @@ resource "kubernetes_manifest" "crds" {
 
   manifest = {
     "apiVersion" = "apiextensions.k8s.io/v1beta1"
-    "kind" = "CustomResourceDefinition"
+    "kind"       = "CustomResourceDefinition"
     "metadata" = {
       "annotations" = {
         "controller-gen.kubebuilder.io/version" = "v0.4.0"
@@ -16,34 +16,34 @@ resource "kubernetes_manifest" "crds" {
     "spec" = {
       "additionalPrinterColumns" = [
         {
-          "JSONPath" = ".spec.serviceRef.name"
+          "JSONPath"    = ".spec.serviceRef.name"
           "description" = "The Kubernetes Service's name"
-          "name" = "SERVICE-NAME"
-          "type" = "string"
+          "name"        = "SERVICE-NAME"
+          "type"        = "string"
         },
         {
-          "JSONPath" = ".spec.serviceRef.port"
+          "JSONPath"    = ".spec.serviceRef.port"
           "description" = "The Kubernetes Service's port"
-          "name" = "SERVICE-PORT"
-          "type" = "string"
+          "name"        = "SERVICE-PORT"
+          "type"        = "string"
         },
         {
-          "JSONPath" = ".spec.targetType"
+          "JSONPath"    = ".spec.targetType"
           "description" = "The AWS TargetGroup's TargetType"
-          "name" = "TARGET-TYPE"
-          "type" = "string"
+          "name"        = "TARGET-TYPE"
+          "type"        = "string"
         },
         {
-          "JSONPath" = ".spec.targetGroupARN"
+          "JSONPath"    = ".spec.targetGroupARN"
           "description" = "The AWS TargetGroup's Amazon Resource Name"
-          "name" = "ARN"
-          "priority" = 1
-          "type" = "string"
+          "name"        = "ARN"
+          "priority"    = 1
+          "type"        = "string"
         },
         {
           "JSONPath" = ".metadata.creationTimestamp"
-          "name" = "AGE"
-          "type" = "date"
+          "name"     = "AGE"
+          "type"     = "date"
         },
       ]
       "group" = "elbv2.k8s.aws"
@@ -51,9 +51,9 @@ resource "kubernetes_manifest" "crds" {
         "categories" = [
           "all",
         ]
-        "kind" = "TargetGroupBinding"
+        "kind"     = "TargetGroupBinding"
         "listKind" = "TargetGroupBindingList"
-        "plural" = "targetgroupbindings"
+        "plural"   = "targetgroupbindings"
         "singular" = "targetgroupbinding"
       }
       "scope" = "Namespaced"
@@ -66,11 +66,11 @@ resource "kubernetes_manifest" "crds" {
           "properties" = {
             "apiVersion" = {
               "description" = "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
-              "type" = "string"
+              "type"        = "string"
             }
             "kind" = {
               "description" = "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
-              "type" = "string"
+              "type"        = "string"
             }
             "metadata" = {
               "type" = "object"
@@ -95,7 +95,7 @@ resource "kubernetes_manifest" "crds" {
                                   "properties" = {
                                     "cidr" = {
                                       "description" = "CIDR is the network CIDR. Both IPV4 or IPV6 CIDR are accepted."
-                                      "type" = "string"
+                                      "type"        = "string"
                                     }
                                   }
                                   "required" = [
@@ -108,7 +108,7 @@ resource "kubernetes_manifest" "crds" {
                                   "properties" = {
                                     "groupID" = {
                                       "description" = "GroupID is the EC2 SecurityGroupID."
-                                      "type" = "string"
+                                      "type"        = "string"
                                     }
                                   }
                                   "required" = [
@@ -134,7 +134,7 @@ resource "kubernetes_manifest" "crds" {
                                       "type" = "string"
                                     },
                                   ]
-                                  "description" = "The port which traffic must match. When NodePort endpoints(instance TargetType) is used, this must be a numerical port. When Port endpoints(ip TargetType) is used, this can be either numerical or named port on pods. if port is unspecified, it defaults to all ports."
+                                  "description"                = "The port which traffic must match. When NodePort endpoints(instance TargetType) is used, this must be a numerical port. When Port endpoints(ip TargetType) is used, this can be either numerical or named port on pods. if port is unspecified, it defaults to all ports."
                                   "x-kubernetes-int-or-string" = true
                                 }
                                 "protocol" = {
@@ -167,7 +167,7 @@ resource "kubernetes_manifest" "crds" {
                   "properties" = {
                     "name" = {
                       "description" = "Name is the name of the Service."
-                      "type" = "string"
+                      "type"        = "string"
                     }
                     "port" = {
                       "anyOf" = [
@@ -178,7 +178,7 @@ resource "kubernetes_manifest" "crds" {
                           "type" = "string"
                         },
                       ]
-                      "description" = "Port is the port of the ServicePort."
+                      "description"                = "Port is the port of the ServicePort."
                       "x-kubernetes-int-or-string" = true
                     }
                   }
@@ -190,7 +190,7 @@ resource "kubernetes_manifest" "crds" {
                 }
                 "targetGroupARN" = {
                   "description" = "targetGroupARN is the Amazon Resource Name (ARN) for the TargetGroup."
-                  "type" = "string"
+                  "type"        = "string"
                 }
                 "targetType" = {
                   "description" = "targetType is the TargetType of TargetGroup. If unspecified, it will be automatically inferred."
@@ -212,8 +212,8 @@ resource "kubernetes_manifest" "crds" {
               "properties" = {
                 "observedGeneration" = {
                   "description" = "The generation observed by the TargetGroupBinding controller."
-                  "format" = "int64"
-                  "type" = "integer"
+                  "format"      = "int64"
+                  "type"        = "integer"
                 }
               }
               "type" = "object"
@@ -225,25 +225,16 @@ resource "kubernetes_manifest" "crds" {
       "version" = "v1alpha1"
       "versions" = [
         {
-          "name" = "v1alpha1"
-          "served" = true
+          "name"    = "v1alpha1"
+          "served"  = true
           "storage" = false
         },
         {
-          "name" = "v1beta1"
-          "served" = true
+          "name"    = "v1beta1"
+          "served"  = true
           "storage" = true
         },
       ]
     }
-    # "status" = {
-    #   "acceptedNames" = {
-    #     "kind" = ""
-    #     "plural" = ""
-    #   }
-    #   "conditions" = []
-    #   "storedVersions" = []
-    # }
   }
-
 }
