@@ -38,7 +38,6 @@ resource "helm_release" "lb_controller" {
     content {
       name  = set.key
       value = set.value
-      type  = "string"
     }
   }
 }
