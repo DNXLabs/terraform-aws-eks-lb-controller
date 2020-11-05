@@ -1,11 +1,12 @@
 variable "enabled" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
+  description = "Variable indicating whether deployment is enabled."
 }
 
 variable "cluster_name" {
   type        = string
-  description = "EKS cluster name."
+  description = "The name of the cluster."
 }
 
 variable "cluster_identity_oidc_issuer" {

@@ -3,6 +3,8 @@
 [![Lint Status](https://github.com/DNXLabs/terraform-aws-eks-lb-controller/workflows/Lint/badge.svg)](https://github.com/DNXLabs/terraform-aws-eks-lb-controller/actions)
 [![LICENSE](https://img.shields.io/github/license/DNXLabs/terraform-aws-eks-lb-controller)](https://github.com/DNXLabs/terraform-aws-eks-lb-controller/blob/master/LICENSE)
 
+Terraform module for deploying [AWS Load Balancer Controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller) inside a pre-existing EKS cluster.
+
 <!--- BEGIN_TF_DOCS --->
 
 ## Requirements
