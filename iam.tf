@@ -1,5 +1,5 @@
 # Policy
-data "aws_iam_policy_document" "alb_ingress" {
+data "aws_iam_policy_document" "lb_controller" {
   count = var.enabled ? 1 : 0
 
   statement {
@@ -134,18 +134,18 @@ data "aws_iam_policy_document" "alb_ingress" {
 
 }
 
-resource "aws_iam_policy" "alb_ingress" {
+resource "aws_iam_policy" "lb_controller" {
   depends_on  = [var.mod_dependency]
   count       = var.enabled ? 1 : 0
   name        = "${var.cluster_name}-alb-ingress"
   path        = "/"
   description = "Policy for alb-ingress service"
 
-  policy = data.aws_iam_policy_document.alb_ingress[0].json
+  policy = data.aws_iam_policy_document.lb_controller[0].json
 }
 
 # Role
-data "aws_iam_policy_document" "alb_ingress_assume" {
+data "aws_iam_policy_document" "lb_controller_assume" {
   count = var.enabled ? 1 : 0
 
   statement {
@@ -169,14 +169,14 @@ data "aws_iam_policy_document" "alb_ingress_assume" {
   }
 }
 
-resource "aws_iam_role" "alb_ingress" {
+resource "aws_iam_role" "lb_controller" {
   count              = var.enabled ? 1 : 0
   name               = "${var.cluster_name}-alb-ingress"
-  assume_role_policy = data.aws_iam_policy_document.alb_ingress_assume[0].json
+  assume_role_policy = data.aws_iam_policy_document.lb_controller_assume[0].json
 }
 
-resource "aws_iam_role_policy_attachment" "alb_ingress" {
+resource "aws_iam_role_policy_attachment" "lb_controller" {
   count      = var.enabled ? 1 : 0
-  role       = aws_iam_role.alb_ingress[0].name
-  policy_arn = aws_iam_policy.alb_ingress[0].arn
+  role       = aws_iam_role.lb_controller[0].name
+  policy_arn = aws_iam_policy.lb_controller[0].arn
 }
