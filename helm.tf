@@ -1,5 +1,5 @@
 resource "helm_release" "lb_controller" {
-  depends_on = [var.mod_dependency, kubernetes_manifest.crds, kubernetes_namespace.lb_controller]
+  depends_on = [var.mod_dependency, kubectl_manifest.crds, kubernetes_namespace.lb_controller]
   count      = var.enabled ? 1 : 0
   name       = var.helm_chart_name
   chart      = var.helm_chart_release_name
