@@ -32,12 +32,7 @@ resource "helm_release" "lb_controller" {
     value = aws_iam_role.lb_controller[0].arn
   }
 
-  dynamic "set" {
-    for_each = var.settings
-
-    content {
-      name  = set.key
-      value = set.value
-    }
-  }
+  values = [
+    yamlencode(var.settings)
+  ]
 }
