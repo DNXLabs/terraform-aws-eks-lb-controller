@@ -66,7 +66,6 @@ variable "mod_dependency" {
 }
 
 variable "settings" {
-  type        = map(any)
   default     = {}
   description = "Additional settings which will be passed to the Helm chart values, see https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller#configuration."
 }
