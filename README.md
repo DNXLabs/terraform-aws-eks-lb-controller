@@ -23,7 +23,7 @@ module "load_balancer_controller" {
 
 | Name | Version |
 |------|---------|
-| terraform | ~> 0.13 |
+| terraform | >= 0.13 |
 | aws | >= 3.13, < 4.0 |
 | helm | >= 1.0, < 3.0 |
 | kubectl | >= 1.9.4 |
