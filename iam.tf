@@ -87,7 +87,7 @@ data "aws_iam_policy_document" "lb_controller" {
     ]
 
     resources = [
-      "arn:aws:ec2:*:*:security-group/*"
+      "arn:${var.arn_format}:ec2:*:*:security-group/*"
     ]
 
     condition {
@@ -118,7 +118,7 @@ data "aws_iam_policy_document" "lb_controller" {
     ]
 
     resources = [
-      "arn:aws:ec2:*:*:security-group/*"
+      "arn:${var.arn_format}:ec2:*:*:security-group/*"
     ]
 
     condition {
@@ -207,9 +207,9 @@ data "aws_iam_policy_document" "lb_controller" {
     ]
 
     resources = [
-      "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*",
-      "arn:aws:elasticloadbalancing:*:*:loadbalancer/net/*/*",
-      "arn:aws:elasticloadbalancing:*:*:loadbalancer/app/*/*"
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:targetgroup/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:loadbalancer/app/*/*"
     ]
 
     condition {
@@ -239,10 +239,10 @@ data "aws_iam_policy_document" "lb_controller" {
       "elasticloadbalancing:RemoveTags"
     ]
     resources = [
-      "arn:aws:elasticloadbalancing:*:*:listener/net/*/*/*",
-      "arn:aws:elasticloadbalancing:*:*:listener/app/*/*/*",
-      "arn:aws:elasticloadbalancing:*:*:listener-rule/net/*/*/*",
-      "arn:aws:elasticloadbalancing:*:*:listener-rule/app/*/*/*"
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:listener/net/*/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:listener/app/*/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:listener-rule/net/*/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:listener-rule/app/*/*/*"
     ]
     effect = "Allow"
   }
@@ -281,7 +281,7 @@ data "aws_iam_policy_document" "lb_controller" {
       "elasticloadbalancing:DeregisterTargets"
     ]
     resources = [
-      "arn:aws:elasticloadbalancing:*:*:targetgroup/*/*"
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:targetgroup/*/*"
     ]
     effect = "Allow"
   }

@@ -60,6 +60,11 @@ variable "service_account_name" {
   description = "The kubernetes service account name."
 }
 
+variable "arn_format" {
+  default     = "aws"
+  description = "ARNs identifier, usefull for GovCloud begin with `aws-us-gov-<region>`."
+}
+
 variable "mod_dependency" {
   default     = null
   description = "Dependence variable binds all AWS resources allocated by this module, dependent modules reference this variable."
