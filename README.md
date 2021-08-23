@@ -42,6 +42,7 @@ module "load_balancer_controller" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| arn\_format | ARNs identifier, usefull for GovCloud begin with `aws-us-gov-<region>`. | `string` | `"aws"` | no |
 | cluster\_identity\_oidc\_issuer | The OIDC Identity issuer for the cluster. | `string` | n/a | yes |
 | cluster\_identity\_oidc\_issuer\_arn | The OIDC Identity issuer ARN for the cluster that can be used to associate IAM roles with a service account. | `string` | n/a | yes |
 | cluster\_name | The name of the cluster. | `string` | n/a | yes |
