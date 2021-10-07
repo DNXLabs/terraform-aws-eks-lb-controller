@@ -1,6 +1,5 @@
 module "load_balancer_controller" {
-  source  = "DNXLabs/eks-lb-controller/aws"
-  version = "0.3.0"
+  source = "../.."
 
   enabled = true
 
