@@ -7,9 +7,5 @@ terraform {
     random     = ">= 2.1"
     kubernetes = "~> 1.10"
     helm       = ">= 1.0"
-    kubectl = {
-      source  = "gavinbunney/kubectl"
-      version = ">= 1.9.4"
-    }
   }
 }
