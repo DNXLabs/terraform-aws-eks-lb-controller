@@ -4,12 +4,33 @@ data "aws_iam_policy_document" "lb_controller" {
 
   statement {
     actions = [
-      "iam:CreateServiceLinkedRole",
+      "iam:CreateServiceLinkedRole"
+    ]
+
+    resources = [
+      "*"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "iam:AWSServiceName"
+
+      values = [
+        "elasticloadbalancing.amazonaws.com"
+      ]
+    }
+
+    effect = "Allow"
+  }
+
+  statement {
+    actions = [
       "ec2:DescribeAccountAttributes",
       "ec2:DescribeAddresses",
       "ec2:DescribeAvailabilityZones",
       "ec2:DescribeInternetGateways",
       "ec2:DescribeVpcs",
+      "ec2:DescribeVpcPeeringConnections",
       "ec2:DescribeSubnets",
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeInstances",
