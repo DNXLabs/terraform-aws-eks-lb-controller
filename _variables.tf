@@ -56,21 +56,25 @@ variable "namespace" {
 }
 
 variable "service_account_name" {
+  type        = string
   default     = "aws-alb-ingress-controller"
   description = "The kubernetes service account name."
 }
 
 variable "arn_format" {
+  type        = string
   default     = "aws"
   description = "ARNs identifier, usefull for GovCloud begin with `aws-us-gov-<region>`."
 }
 
 variable "mod_dependency" {
+  type        = any
   default     = null
   description = "Dependence variable binds all AWS resources allocated by this module, dependent modules reference this variable."
 }
 
 variable "settings" {
+  type        = map
   default     = {}
   description = "Additional settings which will be passed to the Helm chart values, see https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller#configuration."
 }
