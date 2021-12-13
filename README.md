@@ -52,6 +52,7 @@ module "load_balancer_controller" {
 | helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.3.2"` | no |
 | mod\_dependency | Dependence variable binds all AWS resources allocated by this module, dependent modules reference this variable. | `any` | `null` | no |
 | namespace | AWS Load Balancer Controller Helm chart namespace which the service will be created. | `string` | `"kube-system"` | no |
+| permissions_boundary | ARN of the policy that is used to set the permissions boundary for the role | `string` | `null` | no |
 | service\_account\_name | The kubernetes service account name. | `string` | `"aws-alb-ingress-controller"` | no |
 | settings | Additional settings which will be passed to the Helm chart values, see https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller#configuration. | `any` | `{}` | no |
 
