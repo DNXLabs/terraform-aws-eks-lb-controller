@@ -24,7 +24,7 @@ module "load_balancer_controller" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.13, < 4.0 |
+| aws | >= 3.13 |
 | helm | >= 1.0, < 3.0 |
 | kubernetes | >= 1.10.0, < 3.0.0 |
 
@@ -32,7 +32,7 @@ module "load_balancer_controller" {
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.13, < 4.0 |
+| aws | >= 3.13 |
 | helm | >= 1.0, < 3.0 |
 | kubernetes | >= 1.10.0, < 3.0.0 |
 
@@ -49,7 +49,7 @@ module "load_balancer_controller" {
 | helm\_chart\_name | AWS Load Balancer Controller Helm chart name. | `string` | `"aws-load-balancer-controller"` | no |
 | helm\_chart\_release\_name | AWS Load Balancer Controller Helm chart release name. | `string` | `"aws-load-balancer-controller"` | no |
 | helm\_chart\_repo | AWS Load Balancer Controller Helm repository name. | `string` | `"https://aws.github.io/eks-charts"` | no |
-| helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.3.2"` | no |
+| helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.4.4"` | no |
 | mod\_dependency | Dependence variable binds all AWS resources allocated by this module, dependent modules reference this variable. | `any` | `null` | no |
 | namespace | AWS Load Balancer Controller Helm chart namespace which the service will be created. | `string` | `"kube-system"` | no |
 | service\_account\_name | The kubernetes service account name. | `string` | `"aws-alb-ingress-controller"` | no |
