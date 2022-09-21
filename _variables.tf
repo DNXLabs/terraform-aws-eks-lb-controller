@@ -85,6 +85,6 @@ variable "roles" {
     namespace     = string
     resourcenames = list(string)
   }))
-  default     = {}
+  default     = []
   description = "RBAC roles that give secret access in other namespaces to the lb controller"
 }
