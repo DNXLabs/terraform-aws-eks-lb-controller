@@ -3,6 +3,6 @@ resource "kubectl_manifest" "cluster_role" {
   yaml_body = templatefile("${path.module}/role.tpl.yaml", {
     name          = "${each.value.name}"
     namespace     = "${each.value.namespace}"
-    resourcenames = "${each.value.secret}"
+    resourcenames = "${each.value.secrets}"
   })
 }

@@ -81,9 +81,9 @@ variable "settings" {
 
 variable "roles" {
   type = list(object({
-    name          = string
-    namespace     = string
-    resourcenames = list(string)
+    name      = string
+    namespace = string
+    secrets   = list(string)
   }))
   default     = []
   description = "RBAC roles that give secret access in other namespaces to the lb controller"
