@@ -78,3 +78,13 @@ variable "settings" {
   default     = {}
   description = "Additional settings which will be passed to the Helm chart values, see https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller#configuration."
 }
+
+variable "roles" {
+  type = list(object({
+    name      = string
+    namespace = string
+    secrets   = list(string)
+  }))
+  default     = []
+  description = "RBAC roles that give secret access in other namespaces to the lb controller"
+}
