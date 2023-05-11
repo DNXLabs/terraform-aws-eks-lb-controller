@@ -1,6 +1,9 @@
 name: Generate terraform docs
 
 on: [pull_request]
+
+permissions: read-all
+
 jobs:
   docs:
     runs-on: ubuntu-latest
