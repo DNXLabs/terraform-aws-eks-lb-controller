@@ -320,6 +320,15 @@ data "aws_iam_policy_document" "lb_controller" {
     ]
     effect = "Allow"
   }
+statement {
+    actions = [
+      "elasticloadbalancing:AddTags"
+    ]
+    resources = [
+      "*",
+    ]
+    effect = "Allow"
+  }
 
 }
 
