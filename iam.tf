@@ -270,6 +270,39 @@ data "aws_iam_policy_document" "lb_controller" {
 
   statement {
     actions = [
+      "elasticloadbalancing:AddTags"
+    ]
+
+    resources = [
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:targetgroup/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:loadbalancer/net/*/*",
+      "arn:${var.arn_format}:elasticloadbalancing:*:*:loadbalancer/app/*/*"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "elasticloadbalancing:CreateAction"
+
+      values = [
+        "CreateTargetGroup",
+        "CreateLoadBalancer"
+      ]
+    }
+
+    condition {
+      test     = "Null"
+      variable = "aws:RequestTag/elbv2.k8s.aws/cluster"
+
+      values = [
+        "false"
+      ]
+    }
+
+    effect = "Allow"
+  }
+
+  statement {
+    actions = [
       "elasticloadbalancing:ModifyLoadBalancerAttributes",
       "elasticloadbalancing:SetIpAddressType",
       "elasticloadbalancing:SetSecurityGroups",
