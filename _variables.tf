@@ -88,3 +88,9 @@ variable "roles" {
   default     = []
   description = "RBAC roles that give secret access in other namespaces to the lb controller"
 }
+
+variable "role_name" {
+  type = string
+  default     = null
+  description = "Optional Parameter to override the naming convention used '<cluster-name>-alb-ingress' role name"
+}

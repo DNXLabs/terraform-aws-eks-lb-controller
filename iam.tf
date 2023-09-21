@@ -1,3 +1,7 @@
+locals {
+  role_name = var.role_name==null ? "${var.cluster_name}-alb-ingress" : var.role_name
+}
+
 # Policy
 data "aws_iam_policy_document" "lb_controller" {
   count = var.enabled ? 1 : 0
@@ -326,7 +330,7 @@ data "aws_iam_policy_document" "lb_controller" {
 resource "aws_iam_policy" "lb_controller" {
   depends_on  = [var.mod_dependency]
   count       = var.enabled ? 1 : 0
-  name        = "${var.cluster_name}-alb-ingress"
+  name        = local.role_name
   path        = "/"
   description = "Policy for alb-ingress service"
 
@@ -360,7 +364,7 @@ data "aws_iam_policy_document" "lb_controller_assume" {
 
 resource "aws_iam_role" "lb_controller" {
   count              = var.enabled ? 1 : 0
-  name               = "${var.cluster_name}-alb-ingress"
+  name               = local.role_name
   assume_role_policy = data.aws_iam_policy_document.lb_controller_assume[0].json
 }
 
