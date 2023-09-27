@@ -24,16 +24,18 @@ module "load_balancer_controller" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.13 |
-| aws | >= 3.13, < 4.0 |
+| aws | >= 3.13 |
 | helm | >= 1.0, < 3.0 |
+| kubectl | >= 1.9.4 |
 | kubernetes | >= 1.10.0, < 3.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3.13, < 4.0 |
+| aws | >= 3.13 |
 | helm | >= 1.0, < 3.0 |
+| kubectl | >= 1.9.4 |
 | kubernetes | >= 1.10.0, < 3.0.0 |
 
 ## Inputs
@@ -49,10 +51,11 @@ module "load_balancer_controller" {
 | helm\_chart\_name | AWS Load Balancer Controller Helm chart name. | `string` | `"aws-load-balancer-controller"` | no |
 | helm\_chart\_release\_name | AWS Load Balancer Controller Helm chart release name. | `string` | `"aws-load-balancer-controller"` | no |
 | helm\_chart\_repo | AWS Load Balancer Controller Helm repository name. | `string` | `"https://aws.github.io/eks-charts"` | no |
-| helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.3.2"` | no |
+| helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.4.4"` | no |
 | mod\_dependency | Dependence variable binds all AWS resources allocated by this module, dependent modules reference this variable. | `any` | `null` | no |
 | namespace | AWS Load Balancer Controller Helm chart namespace which the service will be created. | `string` | `"kube-system"` | no |
 | permissions_boundary | ARN of the policy that is used to set the permissions boundary for the role | `string` | `null` | no |
+| roles | RBAC roles that give secret access in other namespaces to the lb controller | <pre>list(object({<br>    name      = string<br>    namespace = string<br>    secrets   = list(string)<br>  }))</pre> | `[]` | no |
 | service\_account\_name | The kubernetes service account name. | `string` | `"aws-alb-ingress-controller"` | no |
 | settings | Additional settings which will be passed to the Helm chart values, see https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller#configuration. | `any` | `{}` | no |
 

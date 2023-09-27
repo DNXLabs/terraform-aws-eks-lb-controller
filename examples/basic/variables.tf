@@ -50,3 +50,21 @@ variable "map_users" {
     },
   ]
 }
+
+variable "roles" {
+  description = "Array of RBAC roles to secrets in a specific namespace that the lb controller needs access to"
+  type = list(object({
+    name          = string
+    namespace     = string
+    resourcenames = list(string)
+  }))
+
+  default = [
+    {
+      name          = "role-name"
+      namespace     = "default"
+      resourcenames = ["secret1", "secret2"]
+    }
+  ]
+
+}

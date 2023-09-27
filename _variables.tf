@@ -39,7 +39,7 @@ variable "helm_chart_repo" {
 
 variable "helm_chart_version" {
   type        = string
-  default     = "1.3.2"
+  default     = "1.4.4"
   description = "AWS Load Balancer Controller Helm chart version."
 }
 
@@ -83,4 +83,20 @@ variable "permissions_boundary" {
   description = "If provided, all IAM roles will be created with this permissions boundary attached."
   type        = string
   default     = null
+}
+
+variable "roles" {
+  type = list(object({
+    name      = string
+    namespace = string
+    secrets   = list(string)
+  }))
+  default     = []
+  description = "RBAC roles that give secret access in other namespaces to the lb controller"
+}
+
+variable "role_name" {
+  type = string
+  default     = null
+  description = "Optional Parameter to override the naming convention used '<cluster-name>-alb-ingress' role name"
 }
