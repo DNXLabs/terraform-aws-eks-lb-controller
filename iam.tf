@@ -399,6 +399,7 @@ resource "aws_iam_role" "lb_controller" {
   count              = var.enabled ? 1 : 0
   name               = local.role_name
   assume_role_policy = data.aws_iam_policy_document.lb_controller_assume[0].json
+  permissions_boundary  = var.permissions_boundary
 }
 
 resource "aws_iam_role_policy_attachment" "lb_controller" {
