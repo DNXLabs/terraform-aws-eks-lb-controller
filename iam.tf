@@ -368,6 +368,7 @@ resource "aws_iam_policy" "lb_controller" {
   description = "Policy for alb-ingress service"
 
   policy = data.aws_iam_policy_document.lb_controller[0].json
+  tags   = var.tags
 }
 
 # Role
@@ -400,7 +401,7 @@ resource "aws_iam_role" "lb_controller" {
   name                 = local.role_name
   assume_role_policy   = data.aws_iam_policy_document.lb_controller_assume[0].json
   permissions_boundary = var.permissions_boundary
-  tags                 = var.iam_role_tags
+  tags                 = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "lb_controller" {
