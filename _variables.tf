@@ -96,7 +96,13 @@ variable "roles" {
 }
 
 variable "role_name" {
-  type = string
+  type        = string
   default     = null
   description = "Optional Parameter to override the naming convention used '<cluster-name>-alb-ingress' role name"
+}
+
+variable "tags" {
+  type        = map(string)
+  default     = null
+  description = "Optional Parameter to add tags to the lb IAM role"
 }
