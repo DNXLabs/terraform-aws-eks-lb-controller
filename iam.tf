@@ -1,5 +1,5 @@
 locals {
-  role_name = var.role_name==null ? "${var.cluster_name}-alb-ingress" : var.role_name
+  role_name = var.role_name == null ? "${var.cluster_name}-alb-ingress" : var.role_name
 }
 
 # Policy
@@ -396,10 +396,11 @@ data "aws_iam_policy_document" "lb_controller_assume" {
 }
 
 resource "aws_iam_role" "lb_controller" {
-  count              = var.enabled ? 1 : 0
-  name               = local.role_name
-  assume_role_policy = data.aws_iam_policy_document.lb_controller_assume[0].json
-  permissions_boundary  = var.permissions_boundary
+  count                = var.enabled ? 1 : 0
+  name                 = local.role_name
+  assume_role_policy   = data.aws_iam_policy_document.lb_controller_assume[0].json
+  permissions_boundary = var.permissions_boundary
+  tags                 = var.iam_role_tags
 }
 
 resource "aws_iam_role_policy_attachment" "lb_controller" {
