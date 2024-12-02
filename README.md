@@ -51,7 +51,7 @@ module "load_balancer_controller" {
 | helm\_chart\_name | AWS Load Balancer Controller Helm chart name. | `string` | `"aws-load-balancer-controller"` | no |
 | helm\_chart\_release\_name | AWS Load Balancer Controller Helm chart release name. | `string` | `"aws-load-balancer-controller"` | no |
 | helm\_chart\_repo | AWS Load Balancer Controller Helm repository name. | `string` | `"https://aws.github.io/eks-charts"` | no |
-| helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.4.4"` | no |
+| helm\_chart\_version | AWS Load Balancer Controller Helm chart version. | `string` | `"1.10.1"` | no |
 | mod\_dependency | Dependence variable binds all AWS resources allocated by this module, dependent modules reference this variable. | `any` | `null` | no |
 | namespace | AWS Load Balancer Controller Helm chart namespace which the service will be created. | `string` | `"kube-system"` | no |
 | permissions\_boundary | If provided, all IAM roles will be created with this permissions boundary attached. | `string` | `null` | no |
