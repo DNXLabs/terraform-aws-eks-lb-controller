@@ -39,7 +39,7 @@ variable "helm_chart_repo" {
 
 variable "helm_chart_version" {
   type        = string
-  default     = "1.4.4"
+  default     = "1.10.1"
   description = "AWS Load Balancer Controller Helm chart version."
 }
 
