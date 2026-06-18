@@ -2,6 +2,8 @@ data "aws_availability_zones" "available" {}
 
 locals {
   cluster_name = "test-eks-${random_string.suffix.result}"
+  cluster_version = "1.35"
+
 }
 
 resource "random_string" "suffix" {
@@ -58,7 +60,6 @@ resource "aws_security_group" "all_worker_mgmt" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.47"
 
   name                 = "test-vpc"
   cidr                 = "10.0.0.0/16"
@@ -81,39 +82,63 @@ module "vpc" {
 }
 
 module "eks" {
-  source          = "terraform-aws-modules/eks/aws"
-  cluster_name    = local.cluster_name
-  cluster_version = "1.21"
-  subnets         = module.vpc.private_subnets
-  enable_irsa     = true
+  source  = "clouddrove/eks/aws"
+  version = "1.4.8"
 
-  tags = {
-    Environment = "test"
-    GithubRepo  = "terraform-aws-eks"
-    GithubOrg   = "terraform-aws-modules"
+  name                              = local.cluster_name
+  kubernetes_version                = local.cluster_version
+  vpc_id                            = module.vpc.vpc_id
+  subnet_ids                        = module.vpc.private_subnets
+  eks_additional_security_group_ids = [aws_security_group.all_worker_mgmt.id]
+
+  # AWS Managed Node Group
+  # Default Values for all Node Groups
+  managed_node_group_defaults = {
+    subnet_ids = module.vpc.private_subnets
+    tags = {
+      "kubernetes.io/cluster/${module.eks.cluster_name}" = "owned"
+      "k8s.io/cluster/${module.eks.cluster_name}"        = "owned"
+    }
+    block_device_mappings = {
+      xvda = {
+        device_name = "/dev/xvda"
+        ebs = {
+          volume_size = 50
+          volume_type = "gp3"
+          iops        = 3000
+          throughput  = 150
+        }
+      }
+    }
   }
-
-  vpc_id = module.vpc.vpc_id
-
-  worker_groups = [
+  managed_node_group = {
+    worker-group-1 = {
+      name                 = "worker-group-1"
+      nodes_additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
+      capacity_type        = "ON_DEMAND"
+      min_size             = 1
+      max_size             = 2
+      desired_size         = 1
+      force_update_version = true
+      instance_types       = ["t3.small"]
+    }
+      worker-group-2 = {
+      name                 = "worker-group-2"
+      nodes_additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
+      capacity_type        = "ON_DEMAND"
+      min_size             = 1
+      max_size             = 1
+      desired_size         = 1
+      force_update_version = true
+      instance_types       = ["t3.medium"]
+    }
+  }
+  apply_config_map_aws_auth = true
+  map_additional_iam_users = [
     {
-      name                          = "worker-group-1"
-      instance_type                 = "t3.small"
-      additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 2
-      additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
-    },
-    {
-      name                          = "worker-group-2"
-      instance_type                 = "t3.medium"
-      additional_userdata           = "echo foo bar"
-      additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
-      asg_desired_capacity          = 1
-    },
+      userarn  = "arn:aws:iam::123456789012:user/hello@clouddrove.com"
+      username = "hello@clouddrove.com"
+      groups   = ["system:masters"]
+    }
   ]
-
-  worker_additional_security_group_ids = [aws_security_group.all_worker_mgmt.id]
-  map_roles                            = var.map_roles
-  map_users                            = var.map_users
-  map_accounts                         = var.map_accounts
 }

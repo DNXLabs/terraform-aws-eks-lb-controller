@@ -1,11 +1,27 @@
+
 terraform {
-  required_version = ">= 0.13.0"
+  required_version = ">= 1.10.0"
 
   required_providers {
-    aws        = ">= 3.13.0"
-    local      = ">= 1.4"
-    random     = ">= 2.1"
-    kubernetes = "~> 1.10"
-    helm       = ">= 1.0"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = ">= 0.8"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = ">= 2.6"
+    }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.14.0"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = ">= 2.0.0"
+    }
   }
 }
